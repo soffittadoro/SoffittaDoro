@@ -1,81 +1,130 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <link rel="manifest" href="manifest.json">
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js');
-  }
-</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Soffitta D'Oro</title>
+    <title>Soffitta d'Oro - Valuta Oggetti</title>
     <style>
         body {
-            background-color: #1a1a1a;
-            color: #e0e0e0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            max-width: 800px;
-            margin: 40px auto;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
             padding: 20px;
+            text-align: center;
         }
-        h1, h2 {
-            color: #ffd700; /* Un bellissimo colore oro */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
         h1 {
-            border-bottom: 2px solid #ffd700;
-            padding-bottom: 10px;
+            color: #d4af37; /* Colore oro */
+            font-size: 24px;
         }
-        ul {
-            background-color: #2a2a2a;
-            padding: 20px 40px;
+        p {
+            color: #666;
+        }
+        .upload-btn-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            margin: 20px 0;
+        }
+        .btn {
+            border: 2px solid #d4af37;
+            color: white;
+            background-color: #d4af37;
+            padding: 12px 24px;
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
         }
-        li {
-            margin-bottom: 10px;
+        .upload-btn-wrapper input[type=file] {
+            font-size: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            cursor: pointer;
         }
-        strong {
-            color: #fff;
+        #preview {
+            max-width: 100%;
+            max-height: 300px;
+            margin-top: 15px;
+            border-radius: 8px;
+            display: none;
         }
-        small {
-            color: #888;
-            display: block;
-            margin-top: 40px;
-            border-top: 1px solid #333;
-            padding-top: 10px;
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff9db;
+            border: 1px solid #ffe066;
+            border-radius: 8px;
+            display: none;
+            text-align: left;
         }
     </style>
 </head>
 <body>
-  <div style="text-align: center; margin-top: 20px;">
-        <img src="nuovologo.jpeg" style="max-width: 100%; width: 400px; border-radius: 16px; box-shadow: 0 8px 20px rgba(0,0,0,0.6);" alt="Logo Ufficiale Soffitta D'Oro">
-    </div>
- <p>L'app definitiva per valutare, tracciare e vendere i tuoi tesori nascosti nel mondo.</p>
 
-    <div style="text-align: center; margin: 30px 0;">
-        <a href="#prezzi" style="background-color: #ffd700; color: #1a1a1a; padding: 15px 30px; text-decoration: none; font-weight: bold; border-radius: 30px; font-size: 1.1em; box-shadow: 0 4px 10px rgba(255,215,0,0.3); display: inline-block;">Scarica Subito l'App</a>
+    <div class="container">
+        <h1>Soffitta d'Oro</h1>
+        <p>Fotografa o carica l'immagine del tuo oggetto per stimarne il valore e scoprire dove venderlo.</p>
+
+        <!-- Pulsante per scattare foto o caricare file dalla galleria -->
+        <div class="upload-btn-wrapper">
+            <button class="btn">📸 Fotografa / Carica Oggetto</button>
+            <input type="file" id="fileInput" accept="image/*" capture="environment">
+        </div>
+
+        <div>
+            <img id="preview" alt="Anteprima oggetto">
+        </div>
+
+        <!-- Sezione dei risultati della valutazione -->
+        <div id="resultBox" class="result-box">
+            <h3 style="margin-top: 0; color: #b78103;">Risultato dell'analisi:</h3>
+            <p id="itemDescription"><strong>Oggetto rilevato:</strong> Analisi in corso...</p>
+            <p id="itemValue"><strong>Valore stimato:</strong> --</p>
+            <p id="itemMarket"><strong>Dove venderlo:</strong> --</p>
+        </div>
     </div>
 
-    <h2>Cosa puoi fare con Soffitta D'Oro:</h2>
-    <ul>
-        <li><strong>Scansione Istantanea IA:</strong> Inquadra francobolli, carte, figurine, vestiti o mobili per scoprire subito il loro valore di mercato.</li>
-        <li><strong>Tracciamento del Valore:</strong> Monitora la crescita e la quotazione dei tuoi beni nel tempo come un vero portafoglio finanziario.</li>
-        <li><strong>Vendita Multi-Piattaforma:</strong> Pubblica il tuo annuncio in un click su eBay, Vinted, Subito e mercati internazionali.</li>
-    </ul>
-
-    <h2>Piani e Prezzi:</h2>
-    <ul>
-        <li><strong>Piano Free:</strong> 3 scansioni gratis al giorno. Finite le scansioni? Guarda un breve annuncio per ottenere +1 scansione bonus!</li>
-        <li><strong>Piano Premium:</strong> Scansioni illimitate, grafici storici avanzati e nessuna pubblicità.</li>
-    </ul>
-<h2>Contatti e Supporto</h2>
-    <div style="background-color: #2a2a2a; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
-        <p>Hai domande, suggerimenti o hai bisogno di assistenza con le tue valutazioni?</p>
-        <p>📧 <strong>Email Supporto:</strong> <a href="mailto:soffittadoropro@gmail.com" style="color: #ffd700; text-decoration: none; font-weight: bold;">Invia un'e-mail protetta</a></p>
-        <p>💬 <strong>Assistenza Rapida:</strong> Siamo disponibili dal lunedì al venerdì dalle 9:00 alle 18:00.</p>
+    <div style="margin-top: 30px;">
+        <a href="welcome.html" style="color: #888; font-size: 14px; text-decoration: underline;">Torna alla pagina di benvenuto</a>
     </div>
-    <small>* Nota legale: Le valutazioni fornite dall'applicazione sono stime commerciali indicative e non costituiscono perizie legali o finanziarie ufficiali.</small>
+
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const preview = document.getElementById('preview');
+        const resultBox = document.getElementById('resultBox');
+        const itemDescription = document.getElementById('itemDescription');
+        const itemValue = document.getElementById('itemValue');
+        const itemMarket = document.getElementById('itemMarket');
+
+        fileInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    
+                    // Mostra la schermata di caricamento risultati
+                    resultBox.style.display = 'block';
+                    itemDescription.innerHTML = "<strong>Oggetto rilevato:</strong> Oggetto generico d'antiquariato/collezione";
+                    itemValue.innerHTML = "<strong>Valore stimato:</strong> Tra i 30,00€ e i 150,00€ (indicativo)";
+                    itemMarket.innerHTML = "<strong>Dove venderlo:</strong> Consigliato su eBay, Vinted o mercatini specializzati.";
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+
 </body>
 </html>
