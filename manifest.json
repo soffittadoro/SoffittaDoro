@@ -1,16 +1,21 @@
-
 {
   "name": "Soffitta D'Oro",
   "short_name": "Soffitta",
+  "description": "L'app definitiva per i tuoi tesori nascosti",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ffffff",
   "icons": [
     {
-      "src": "nuovologo.jpeg",
+      "src": "logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "logo.png",
       "sizes": "512x512",
-      "type": "image/jpeg"
+      "type": "image/png"
     }
   ]
 }
