@@ -27,7 +27,16 @@
             box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
             text-align: center;
         }
-        .logo-area { font-size: 50px; margin-bottom: 10px; }
+        /* Immagine del baule al posto dell'emoji */
+        .logo-img {
+            max-width: 220px;
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            border: 2px solid #d4af37;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
         h1 {
             color: #d4af37;
             font-size: 28px;
@@ -67,7 +76,7 @@
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
             display: inline-flex;
-            align-items: center;
+            align-items: `center`;
             gap: 10px;
         }
         .upload-btn-wrapper input[type=file] {
@@ -94,6 +103,21 @@
         }
         .result-box h3 { color: #d4af37; margin-top: 0; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 8px; }
 
+        /* Pulsante Sblocca con Pubblicità */
+        .btn-ad {
+            background: linear-gradient(135deg, #28a745, #1e7e34);
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            margin-top: 15px;
+            display: none;
+            width: 100%;
+            font-size: 15px;
+        }
+
         /* Box Abbonamento Premium VIP */
         .vip-box {
             margin-top: 25px;
@@ -119,8 +143,8 @@
 
         /* Banner Pubblicitario */
         .ad-banner {
-            margin-top: 30px;
-            padding: 15px;
+            margin-top: 25px;
+            padding: 12px;
             background: rgba(255, 255, 255, 0.03);
             border: 1px dashed #666;
             border-radius: 8px;
@@ -130,7 +154,7 @@
 
         /* Legale e Disclaimer */
         .legal-disclaimer {
-            margin-top: 30px;
+            margin-top: 25px;
             padding-top: 15px;
             border-top: 1px solid rgba(255, 255, 255, 0.15);
             font-size: 11px;
@@ -143,15 +167,15 @@
 <body>
 
     <div class="container">
-        <!-- Logo e grafica -->
-        <div class="logo-area">🧳</div>
+        <!-- Logo con il Baule e le Stelle -->
+        <img src="logo.png" alt="Soffitta d'Oro Logo" class="logo-img" onerror="this.src='welcome.html'">
         <h1>Soffitta d'Oro</h1>
         <div class="stars">✨ ⭐ 🌟 ⭐ ✨</div>
-        <p>Fotografa o carica un oggetto per stimarne il valore di mercato e scoprire i canali di vendita migliori.</p>
+        <p>Fotografa o carica un oggetto per stimare il suo valore di mercato e scoprire dove venderlo.</p>
 
-        <!-- Contatore scansioni gratuite -->
+        <!-- Contatore Scansioni Giornaliere -->
         <div class="scan-counter">
-            Scansioni gratuite rimanenti: <strong id="freeScans">3</strong>/3
+            Scansioni gratuite oggi: <strong id="freeScans">3</strong>/3
         </div>
 
         <!-- Scansione -->
@@ -159,6 +183,9 @@
             <button class="btn-gold">📷 Fotografa / Carica Oggetto</button>
             <input type="file" id="fileInput" accept="image/*" capture="environment">
         </div>
+
+        <!-- Pulsante per sbloccare la scansione guardando una pubblicità -->
+        <button id="adButton" class="btn-ad" onclick="watchAd()">📺 Guarda una pubblicità e sblocca 1 scansione</button>
 
         <div>
             <img id="preview" alt="Anteprima oggetto">
@@ -175,11 +202,11 @@
         <!-- Piano Abbonamento VIP -->
         <div class="vip-box">
             <h3>👑 Passa a Soffitta d'Oro VIP</h3>
-            <p style="font-size: 13px; margin-bottom: 10px;">Scansioni ILLIMITATE, valutazioni dettagliate ed espertise prioritaria a soli <strong>4,99€ / mese</strong>.</p>
+            <p style="font-size: 13px; margin-bottom: 10px;">Scansioni ILLIMITATE, valutazioni dettagliate e zero pubblicità a soli <strong>4,99€ / mese</strong>.</p>
             <button class="btn-vip" onclick="alert('Integrazione pagamento in arrivo!')">Sblocca Scansioni Illimitate</button>
         </div>
 
-        <!-- Banner Pubblicitario (Piano Adv) -->
+        <!-- Banner Pubblicitario Fisso -->
         <div class="ad-banner">
             📢 <i>Spazio Pubblicitario (Google AdMob / Ads)</i>
         </div>
@@ -187,8 +214,8 @@
         <!-- Garanzie Legali Completi -->
         <div class="legal-disclaimer">
             <strong>Garanzie Legali e Termini di Servizio:</strong><br>
-            1. <strong>Esonero di Responsabilità:</strong> Le stime e le indicazioni di vendita fornite dall'applicazione hanno scopo puramente indicativo, amatoriale e informativo. Non costituiscono perizie legali, leganti o commerciali. Il titolare dell'app non risponde di eventuali perdite o difformità di prezzo nelle vendite reali.<br>
-            2. <strong>Privacy:</strong> Le immagini caricate vengono elaborate esclusivamente per erogare il servizio di analisi e non vengono cedute a terzi.
+            1. <strong>Esonero di Responsabilità:</strong> Le stime e le indicazioni di vendita fornite dall'applicazione hanno scopo puramente indicativo, amatoriale e informativo. Non costituiscono perizie legali o commerciali. Il titolare declina ogni responsabilità per difformità di prezzo nelle vendite reali.<br>
+            2. <strong>Privacy:</strong> Le immagini caricate vengono elaborate esclusivamente per erogare il servizio di analisi.
         </div>
     </div>
 
@@ -198,13 +225,15 @@
         const freeScansElement = document.getElementById('freeScans');
         const preview = document.getElementById('preview');
         const resultBox = document.getElementById('resultBox');
+        const adButton = document.getElementById('adButton');
         const itemDescription = document.getElementById('itemDescription');
         const itemValue = document.getElementById('itemValue');
         const itemMarket = document.getElementById('itemMarket');
 
         fileInput.addEventListener('change', function(event) {
             if (scansLeft <= 0) {
-                alert("Hai esaurito le tue 3 scansioni gratuite! Passa a Soffitta d'Oro VIP per continuare.");
+                alert("Hai esaurito le 3 scansioni gratuite di oggi! Guarda un video pubblicitario qui sotto per sbloccare una scansione extra, oppure passa a VIP.");
+                adButton.style.display = 'block';
                 return;
             }
 
@@ -224,8 +253,21 @@
                     itemMarket.innerHTML = "<strong>Dove venderlo:</strong> Consigliato su eBay, Vinted o mercatini specializzati.";
                 }
                 reader.readAsDataURL(file);
+
+                if (scansLeft <= 0) {
+                    adButton.style.display = 'block';
+                }
             }
         });
+
+        function watchAd() {
+            // Simulazione della visione della pubblicità (poi qui collegherai Google AdMob Rewarded Video)
+            alert("Simulazione: Annuncio pubblicitario riprodotto con successo!");
+            scansLeft = 1; // Ricarica 1 scansione
+            freeScansElement.innerText = scansLeft;
+            adButton.style.display = 'none';
+            alert("Ottimo! Hai sbloccato 1 nuova scansione gratuita.");
+        }
     </script>
 
 </body>
