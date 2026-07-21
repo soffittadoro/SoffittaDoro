@@ -1,0 +1,16 @@
+
+{
+  "name": "Soffitta D'Oro",
+  "short_name": "Soffitta",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "nuovologo.jpeg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
