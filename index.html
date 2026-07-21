@@ -6,79 +6,157 @@
     <title>Soffitta d'Oro - Valuta Oggetti</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+            color: #f4f4f9;
             margin: 0;
             padding: 20px;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
         .container {
             max-width: 600px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 2px solid #d4af37;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
+            text-align: center;
         }
+        .logo-area { font-size: 50px; margin-bottom: 10px; }
         h1 {
-            color: #d4af37; /* Colore oro */
-            font-size: 24px;
+            color: #d4af37;
+            font-size: 28px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
-        p {
-            color: #666;
+        .stars { color: #d4af37; font-size: 18px; margin-bottom: 15px; }
+        p { color: #ddd; font-size: 15px; line-height: 1.5; margin-bottom: 20px; }
+        
+        /* Contatore Scansioni */
+        .scan-counter {
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid #d4af37;
+            padding: 8px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 14px;
+            color: #ffd700;
+            margin-bottom: 20px;
         }
+
         .upload-btn-wrapper {
             position: relative;
             overflow: hidden;
             display: inline-block;
-            margin: 20px 0;
+            margin: 10px 0;
         }
-        .btn {
-            border: 2px solid #d4af37;
-            color: white;
-            background-color: #d4af37;
-            padding: 12px 24px;
-            border-radius: 8px;
+        .btn-gold {
+            background: linear-gradient(135deg, #d4af37, #aa8c2c);
+            color: #1a1a1a;
+            padding: 16px 32px;
+            border-radius: 12px;
             font-size: 18px;
             font-weight: bold;
+            border: none;
             cursor: pointer;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
         }
         .upload-btn-wrapper input[type=file] {
             font-size: 100px;
             position: absolute;
-            left: 0;
-            top: 0;
-            opacity: 0;
-            cursor: pointer;
+            left: 0; top: 0; opacity: 0; cursor: pointer;
         }
         #preview {
             max-width: 100%;
-            max-height: 300px;
-            margin-top: 15px;
-            border-radius: 8px;
+            max-height: 250px;
+            margin-top: 20px;
+            border-radius: 10px;
+            border: 2px solid #d4af37;
             display: none;
         }
         .result-box {
-            margin-top: 20px;
-            padding: 15px;
-            background: #fff9db;
-            border: 1px solid #ffe066;
-            border-radius: 8px;
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid #d4af37;
+            border-radius: 12px;
             display: none;
             text-align: left;
+        }
+        .result-box h3 { color: #d4af37; margin-top: 0; border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 8px; }
+
+        /* Box Abbonamento Premium VIP */
+        .vip-box {
+            margin-top: 25px;
+            background: linear-gradient(135deg, #2b2100, #4a3b00);
+            border: 2px solid #ffd700;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+        .vip-box h3 { color: #ffd700; margin-top: 0; }
+        .btn-vip {
+            background: #ffd700;
+            color: #000;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        /* Banner Pubblicitario */
+        .ad-banner {
+            margin-top: 30px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px dashed #666;
+            border-radius: 8px;
+            color: #888;
+            font-size: 12px;
+        }
+
+        /* Legale e Disclaimer */
+        .legal-disclaimer {
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            font-size: 11px;
+            color: #999;
+            text-align: justify;
+            line-height: 1.4;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
+        <!-- Logo e grafica -->
+        <div class="logo-area">🧳</div>
         <h1>Soffitta d'Oro</h1>
-        <p>Fotografa o carica l'immagine del tuo oggetto per stimarne il valore e scoprire dove venderlo.</p>
+        <div class="stars">✨ ⭐ 🌟 ⭐ ✨</div>
+        <p>Fotografa o carica un oggetto per stimarne il valore di mercato e scoprire i canali di vendita migliori.</p>
 
-        <!-- Pulsante per scattare foto o caricare file dalla galleria -->
-        <div class="upload-btn-wrapper">
-            <button class="btn">📸 Fotografa / Carica Oggetto</button>
+        <!-- Contatore scansioni gratuite -->
+        <div class="scan-counter">
+            Scansioni gratuite rimanenti: <strong id="freeScans">3</strong>/3
+        </div>
+
+        <!-- Scansione -->
+        <div class="upload-btn-wrapper" id="uploadArea">
+            <button class="btn-gold">📷 Fotografa / Carica Oggetto</button>
             <input type="file" id="fileInput" accept="image/*" capture="environment">
         </div>
 
@@ -86,21 +164,38 @@
             <img id="preview" alt="Anteprima oggetto">
         </div>
 
-        <!-- Sezione dei risultati della valutazione -->
+        <!-- Risultati della stima -->
         <div id="resultBox" class="result-box">
-            <h3 style="margin-top: 0; color: #b78103;">Risultato dell'analisi:</h3>
+            <h3>Risultato dell'analisi:</h3>
             <p id="itemDescription"><strong>Oggetto rilevato:</strong> Analisi in corso...</p>
             <p id="itemValue"><strong>Valore stimato:</strong> --</p>
             <p id="itemMarket"><strong>Dove venderlo:</strong> --</p>
         </div>
-    </div>
 
-    <div style="margin-top: 30px;">
-        <a href="welcome.html" style="color: #888; font-size: 14px; text-decoration: underline;">Torna alla pagina di benvenuto</a>
+        <!-- Piano Abbonamento VIP -->
+        <div class="vip-box">
+            <h3>👑 Passa a Soffitta d'Oro VIP</h3>
+            <p style="font-size: 13px; margin-bottom: 10px;">Scansioni ILLIMITATE, valutazioni dettagliate ed espertise prioritaria a soli <strong>4,99€ / mese</strong>.</p>
+            <button class="btn-vip" onclick="alert('Integrazione pagamento in arrivo!')">Sblocca Scansioni Illimitate</button>
+        </div>
+
+        <!-- Banner Pubblicitario (Piano Adv) -->
+        <div class="ad-banner">
+            📢 <i>Spazio Pubblicitario (Google AdMob / Ads)</i>
+        </div>
+
+        <!-- Garanzie Legali Completi -->
+        <div class="legal-disclaimer">
+            <strong>Garanzie Legali e Termini di Servizio:</strong><br>
+            1. <strong>Esonero di Responsabilità:</strong> Le stime e le indicazioni di vendita fornite dall'applicazione hanno scopo puramente indicativo, amatoriale e informativo. Non costituiscono perizie legali, leganti o commerciali. Il titolare dell'app non risponde di eventuali perdite o difformità di prezzo nelle vendite reali.<br>
+            2. <strong>Privacy:</strong> Le immagini caricate vengono elaborate esclusivamente per erogare il servizio di analisi e non vengono cedute a terzi.
+        </div>
     </div>
 
     <script>
+        let scansLeft = 3;
         const fileInput = document.getElementById('fileInput');
+        const freeScansElement = document.getElementById('freeScans');
         const preview = document.getElementById('preview');
         const resultBox = document.getElementById('resultBox');
         const itemDescription = document.getElementById('itemDescription');
@@ -108,17 +203,24 @@
         const itemMarket = document.getElementById('itemMarket');
 
         fileInput.addEventListener('change', function(event) {
+            if (scansLeft <= 0) {
+                alert("Hai esaurito le tue 3 scansioni gratuite! Passa a Soffitta d'Oro VIP per continuare.");
+                return;
+            }
+
             const file = event.target.files[0];
             if (file) {
+                scansLeft--;
+                freeScansElement.innerText = scansLeft;
+
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     preview.src = e.target.result;
                     preview.style.display = 'block';
                     
-                    // Mostra la schermata di caricamento risultati
                     resultBox.style.display = 'block';
-                    itemDescription.innerHTML = "<strong>Oggetto rilevato:</strong> Oggetto generico d'antiquariato/collezione";
-                    itemValue.innerHTML = "<strong>Valore stimato:</strong> Tra i 30,00€ e i 150,00€ (indicativo)";
+                    itemDescription.innerHTML = "<strong>Oggetto rilevato:</strong> Pezzo da collezione / Antiquariato";
+                    itemValue.innerHTML = "<strong>Valore stimato:</strong> Da 40,00€ a 180,00€ (indicativo)";
                     itemMarket.innerHTML = "<strong>Dove venderlo:</strong> Consigliato su eBay, Vinted o mercatini specializzati.";
                 }
                 reader.readAsDataURL(file);
